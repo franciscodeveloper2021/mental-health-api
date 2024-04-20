@@ -22,4 +22,16 @@ RSpec.describe EvaluatedRepository, type: :repository do
       expect(result).to include(evaluated)
     end
   end
+
+  context "when evaluted is not present on registers" do
+    describe "#show" do
+      it "should raise an Argument error" do
+        allow(Evaluated).to receive(:find_by_id).and_return(nil)
+
+        expect {
+          repository.show(404)
+        }.to raise_error(ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Evaluated", attribute: 404))
+      end
+    end
+  end
 end

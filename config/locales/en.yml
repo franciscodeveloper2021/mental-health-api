@@ -6,5 +6,6 @@ en:
     unformatted: "%{attribute} must be in the format %{formatting}"
     short_length: "%{attribute} is too short (minimum is %{min_length} characters)"
     long_length: "%{attribute} is too long (maximum is %{max_length} characters)"
+    not_found: "%{record} with %{attribute} not found"
   warnings:
     nothing: "There is no register of %{entity}"

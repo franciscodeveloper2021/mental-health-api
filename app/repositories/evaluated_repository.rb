@@ -6,8 +6,11 @@ class EvaluatedRepository
     evaluateds
   end
 
-  def show
-    
+  def show(evaluated_id)
+    evaluated = Evaluated.find_by_id(evaluated_id)
+    raise ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Evaluated", attribute: evaluated_id) if evaluated.nil?
+
+    evaluated
   end
 
   def create
