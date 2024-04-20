@@ -34,7 +34,7 @@ RSpec.describe InstrumentRepository, type: :repository do
 
         expect {
           repository.find_instrument(404)
-        }.to raise_error(ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "instrument", attribute: 404))
+        }.to raise_error(ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Instrument", attribute: 404))
       end
     end
   end

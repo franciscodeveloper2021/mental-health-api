@@ -1,5 +1,9 @@
 class EvaluatedRepository
 
+  def initialize(instrument_repo = InstrumentRepository.new )
+    @instrument_repo = instrument_repo
+  end
+
   def find_all_evaluateds
     evaluateds = Evaluated.all
     return I18n.t("warnings.nothing", entity: "evaluateds") if evaluateds.empty?
@@ -40,5 +44,12 @@ class EvaluatedRepository
     ActiveRecord::Base.transaction do
       evaluated.destroy
     end
+  end
+
+  def assign_instrument(evaluated_id, instrument_id)
+    evaluated = find_evaluated(evaluated_id)
+    instrument = @instrument_repo.find_instrument(instrument_id)
+
+    evaluated.instruments << instrument
   end
 end

@@ -9,7 +9,7 @@ class InstrumentRepository
 
   def find_instrument(instrument_id)
     instrument = Instrument.find_by_id(instrument_id)
-    raise ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "instrument", attribute: instrument_id) if instrument.nil?
+    raise ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Instrument", attribute: instrument_id) if instrument.nil?
 
     instrument
   end

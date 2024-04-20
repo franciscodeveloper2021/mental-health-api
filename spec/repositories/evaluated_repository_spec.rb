@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe EvaluatedRepository, type: :repository do
   let(:repository) { EvaluatedRepository.new }
+  let(:instrument_repo) { InstrumentRepository.new }
   let(:evaluated) { create(:evaluated)}
 
   context "when there is no register of evaluateds" do
@@ -50,29 +51,6 @@ RSpec.describe EvaluatedRepository, type: :repository do
     end
   end
 
-  context "when params are invalid to be updated" do
-    describe "#update" do
-      it "does not update record" do
-        invalid_params = { name: "" }
-
-        repository.update(evaluated.id, invalid_params)
-
-        expect(evaluated.reload.name).not_to eq("")
-      end
-    end
-  end
-  context "when params valid to be updated" do
-    describe "#update" do
-      it "updates record" do
-        valid_params = { name: "New Name" }
-
-        repository.update(evaluated.id, valid_params)
-
-        expect(evaluated.reload.name).to eq("New Name")
-      end
-    end
-  end
-
   context "when params are invalid to be created" do
     describe "#create" do
       it "does not update record" do
@@ -106,6 +84,29 @@ RSpec.describe EvaluatedRepository, type: :repository do
     end
   end
 
+  context "when params are invalid to be updated" do
+    describe "#update" do
+      it "does not update record" do
+        invalid_params = { name: "" }
+
+        repository.update(evaluated.id, invalid_params)
+
+        expect(evaluated.reload.name).not_to eq("")
+      end
+    end
+  end
+  context "when params valid to be updated" do
+    describe "#update" do
+      it "updates record" do
+        valid_params = { name: "New Name" }
+
+        repository.update(evaluated.id, valid_params)
+
+        expect(evaluated.reload.name).to eq("New Name")
+      end
+    end
+  end
+
   context "when record is destroyed" do
     describe "destroy" do
       it "expects to no longer find it on database" do
@@ -113,6 +114,22 @@ RSpec.describe EvaluatedRepository, type: :repository do
 
         expect { repository.find_evaluated(evaluated.id)
         }.to raise_error(ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Evaluated", attribute: evaluated.id))
+      end
+    end
+  end
+
+  context "when evaluated and instrument to be assigned to evaluated does not exist" do
+    describe "assign_instrument" do
+      it "should raise an Argument Error when instrument does not exist" do
+        expect {
+          instrument_repo.find_instrument(-1)
+        }.to raise_error(ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Instrument", attribute: -1))
+      end
+
+      it "should raise an Argument Error when evaluated does not exist" do
+        expect {
+          repository.find_evaluated(-1)
+        }.to raise_error(ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Evaluated", attribute: -1))
       end
     end
   end
