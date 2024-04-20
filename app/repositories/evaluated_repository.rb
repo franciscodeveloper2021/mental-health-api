@@ -30,6 +30,8 @@ class EvaluatedRepository
     ActiveRecord::Base.transaction do
       evaluated.update(params)
     end
+
+    evaluated
   end
 
   def destroy(evaluated_id)

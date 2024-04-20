@@ -27,7 +27,7 @@ class EvaluatedsController < ApplicationController
   def update
     updated_evaluated = @service.update(params[:id], evaluated_params)
 
-    render json: evaluated, status: :ok
+    render json: updated_evaluated, status: :ok
   end
 
   def destroy
