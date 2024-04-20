@@ -7,10 +7,13 @@ class EvaluatedsController < ApplicationController
   end
 
   def index
+    evaluateds = @service.index
+
+    render json: evaluateds, status: :ok
   end
 
   def show
-    evaluated = @service.find_evaluated(params[:id])
+    evaluated = @service.show(params[:id])
 
     render json: evaluated, status: :ok
   end
