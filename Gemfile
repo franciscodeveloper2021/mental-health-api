@@ -19,6 +19,7 @@ group :development, :test do
   gem "rspec-rails", "~> 5.0.0"
   gem "byebug"
   gem "awesome_print"
+  gem "faker"
 end
 
 # Test-only gems
