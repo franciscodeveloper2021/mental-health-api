@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  username: francisco
+  password: 123
+
+development:
+  <<: *default
+  database: mental_healthy_api_development
+
+test:
+  <<: *default
+  database: mental_healthy_api_test
+
+production:
+  <<: *default
+  database: mental_healthy_api_production
+  username: mental_healthy_api
+  password: <%= ENV["MENTAL_HEALTHY_API_DATABASE_PASSWORD"] %>
