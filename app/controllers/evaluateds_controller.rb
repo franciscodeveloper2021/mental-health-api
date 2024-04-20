@@ -33,7 +33,7 @@ class EvaluatedsController < ApplicationController
   def destroy
     update_evaluated = @service.destroy(params[:id])
 
-    render json: { message: "User with #{params[:id]} no longer exists" }, status: :ok
+    render json: { message: I18n.t("errors.no_longer_exists", entity: "User", attribute: params[:id]) }, status: :ok
   end
 
   private
