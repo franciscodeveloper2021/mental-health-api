@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_20_111943) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_20_190129) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_111943) do
     t.index ["cpf"], name: "index_evaluateds_on_cpf", unique: true
     t.index ["email"], name: "index_evaluateds_on_email", unique: true
     t.check_constraint "length(name::text) >= 2", name: "min_length_name"
+  end
+
+  create_table "evaluateds_instruments", id: false, force: :cascade do |t|
+    t.bigint "evaluated_id", null: false
+    t.bigint "instrument_id", null: false
+    t.index ["evaluated_id", "instrument_id"], name: "index_evaluateds_instruments_on_evaluated_id_and_instrument_id"
+    t.index ["instrument_id", "evaluated_id"], name: "index_evaluateds_instruments_on_instrument_id_and_evaluated_id"
   end
 
   create_table "instruments", force: :cascade do |t|
