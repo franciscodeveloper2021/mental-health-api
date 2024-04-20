@@ -17,4 +17,6 @@ class Evaluated < ApplicationRecord
             presence: true,
             format: { with: CPF_REGEX, message: "must be in the format xxx.xxx.xxx-xx" },
             uniqueness: true
+
+  validates :birthdate, presence: true
 end

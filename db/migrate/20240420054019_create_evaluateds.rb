@@ -4,6 +4,7 @@ class CreateEvaluateds < ActiveRecord::Migration[7.1]
       t.string :name, null: false, limit: 50
       t.string :cpf, null: false
       t.string :email, null: false, limit: 254
+      t.date :birthdate, null: false
 
       t.timestamps
     end

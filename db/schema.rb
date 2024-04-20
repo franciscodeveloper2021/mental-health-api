@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_054019) do
     t.string "name", limit: 50, null: false
     t.string "cpf", null: false
     t.string "email", limit: 254, null: false
+    t.date "birthdate", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cpf"], name: "index_evaluateds_on_cpf", unique: true

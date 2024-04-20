@@ -26,6 +26,13 @@ RSpec.describe Evaluated, type: :model do
 
           expect(evaluated.errors.full_messages).to include(I18n.t("errors.blank", attribute: Evaluated.human_attribute_name(:cpf)))
         end
+
+        it "throws an error when birthdate is not present" do
+          evaluated.birthdate = nil
+          evaluated.valid?
+
+          expect(evaluated.errors.full_messages).to include(I18n.t("errors.blank", attribute: Evaluated.human_attribute_name(:birthdate)))
+        end
       end
 
       context "when attribute's length is invalid" do
