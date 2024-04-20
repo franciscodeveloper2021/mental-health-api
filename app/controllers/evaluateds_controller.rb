@@ -22,6 +22,6 @@ class EvaluatedsController < ApplicationController
   private
 
   def evaluated_params
-    params.require(:evaluated).permit(:name, :cpf, :email)
+    params.require(:evaluated).permit(:name, :cpf, :email, :birthdate)
   end
 end
