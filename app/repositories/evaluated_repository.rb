@@ -17,7 +17,9 @@ class EvaluatedRepository
   def create(params)
     evaluated = Evaluated.new(params)
 
-    evaluated.save!
+    ActiveRecord::Base.transaction do
+      evaluated.save!
+    end
 
     evaluated
   end
@@ -25,12 +27,16 @@ class EvaluatedRepository
   def update(evaluated_id, params)
     evaluated = find_evaluated(evaluated_id)
 
-    evaluated.update(params)
+    ActiveRecord::Base.transaction do
+      evaluated.update(params)
+    end
   end
 
   def destroy(evaluated_id)
     evaluated = find_evaluated(evaluated_id)
 
-    evaluated.destroy
+    ActiveRecord::Base.transaction do
+      evaluated.destroy
+    end
   end
 end
