@@ -42,7 +42,7 @@ class EvaluatedsController < ApplicationController
     render json: { evaluated: result, instruments: result.instruments }, status: :ok
   end
 
-  def show_evaluted_with_instruments
+  def show_evaluted_and_related_instruments
     evaluated = @service.show(params[:id])
 
     render json: { evaluated: evaluated, instruments: evaluated.instruments }, status: :ok
