@@ -31,9 +31,21 @@ class EvaluatedsController < ApplicationController
   end
 
   def destroy
-    update_evaluated = @service.destroy(params[:id])
+    evaluated = @service.destroy(params[:id])
 
     render json: { message: I18n.t("errors.no_longer_exists", entity: "User", attribute: params[:id]) }, status: :ok
+  end
+
+  def assign_instrument
+    result = @service.assign_instrument(params[:id], params[:instrument_id])
+
+    render json: { evaluated: result, instruments: result.instruments }, status: :ok
+  end
+
+  def show_evaluted_with_instruments
+    evaluated = @service.show(params[:id])
+
+    render json: { evaluated: evaluated, instruments: evaluated.instruments }, status: :ok
   end
 
   private

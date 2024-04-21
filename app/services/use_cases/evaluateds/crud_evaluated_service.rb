@@ -25,6 +25,10 @@ module UseCases
       def destroy(evaluated_id)
         @repository.destroy(evaluated_id)
       end
+
+      def assign_instrument(evaluated_id, instrument_id)
+        @repository.assign_instrument(evaluated_id, instrument_id)
+      end
     end
   end
 end
