@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe EvaluatedRepository, type: :repository do
   let(:repository) { EvaluatedRepository.new }
-  let(:instrument_repo) { InstrumentRepository.new }
   let(:evaluated) { create(:evaluated)}
+  let(:instrument) { create(:instrument)}
 
   context "when there is no register of evaluateds" do
     describe "#find_all_evaluateds" do
@@ -118,19 +118,31 @@ RSpec.describe EvaluatedRepository, type: :repository do
     end
   end
 
-  context "when evaluated and instrument to be assigned to evaluated does not exist" do
+  context "when evaluated or instrument do not not exist" do
     describe "assign_instrument" do
-      it "should raise an Argument Error when instrument does not exist" do
+      it "should raise an ActiveRecord::RecordNotFound when instrument does not exist" do
         expect {
-          instrument_repo.find_instrument(-1)
+          repository.assign_instrument(evaluated.id, -1)
         }.to raise_error(ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Instrument", attribute: -1))
+
+        expect(evaluated.instruments).to be_empty
       end
 
-      it "should raise an Argument Error when evaluated does not exist" do
+      it "should raise an ActiveRecord::RecordNotFound when evaluated does not exist" do
         expect {
-          repository.find_evaluated(-1)
+          repository.assign_instrument(-1, instrument.id)
         }.to raise_error(ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Evaluated", attribute: -1))
+
+        expect(instrument.evaluateds).to be_empty
       end
+    end
+  end
+  context "when evaluated and isntrument exist" do
+    it "creates a many to many relationship" do
+      repository.assign_instrument(evaluated.id, instrument.id)
+
+      expect(evaluated.instruments).to be_present
+      expect(instrument.evaluateds).to be_present
     end
   end
 end

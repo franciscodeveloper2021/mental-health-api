@@ -50,6 +50,10 @@ class EvaluatedRepository
     evaluated = find_evaluated(evaluated_id)
     instrument = @instrument_repo.find_instrument(instrument_id)
 
-    evaluated.instruments << instrument
+    ActiveRecord::Base.transaction do
+      evaluated.instruments << instrument
+    end
+
+    evaluated
   end
 end

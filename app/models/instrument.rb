@@ -1,7 +1,6 @@
 class Instrument < ApplicationRecord
 
-  has_many :evaluated_instruments
-  has_many :evaluated, through: :evaluated_instruments
+  has_and_belongs_to_many :evaluateds, join_table: :evaluated_instruments
 
   validates :title,
             presence: true,
