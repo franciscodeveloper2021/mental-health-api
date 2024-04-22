@@ -9,7 +9,7 @@ class QuestionRepository
     question = Question.new(params)
 
     if instrument.questions.exists?(content: question.content)
-      raise RuntimeError, I18n.t("warnings.has_been_assigned", entity: question.content, related: instrument.name)
+      raise RuntimeError, I18n.t("warnings.has_been_assigned", entity: question.content, related: instrument.title)
     end
 
     ActiveRecord::Base.transaction do

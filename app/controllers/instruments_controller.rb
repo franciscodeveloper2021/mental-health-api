@@ -7,15 +7,22 @@ class InstrumentsController < ApplicationController
   end
 
   def index
-    instruments = @service.index
+    instruments = @service.index.includes(:questions)
 
-    render json: instruments, status: :ok
+    instrument_data = instruments.map do |instrument|
+      {
+        instrument: instrument,
+        questions: instrument.questions
+      }
+    end
+
+    render json: instrument_data, status: :ok
   end
 
   def show
     instrument = @service.show(params[:id])
 
-    render json: instrument, status: :ok
+    render json: { instrument: instrument, questions: instrument.questions }, status: :ok
   end
 
   def create
