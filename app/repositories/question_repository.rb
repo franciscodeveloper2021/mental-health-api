@@ -18,4 +18,13 @@ class QuestionRepository
 
     question
   end
+
+  def destroy(question_id)
+    question = Question.find_by_id(question_id)
+    raise ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Question", attribute: question_id) if question.nil?
+
+    ActiveRecord::Base.transaction do
+      question.destroy!
+    end
+  end
 end
