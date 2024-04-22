@@ -5,4 +5,5 @@ Rails.application.routes.draw do
       get 'show_evaluted_and_related_instruments'
     end
   end
+  resources :instruments
 end
