@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_20_221239) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_043612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,6 +44,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_221239) do
     t.check_constraint "length(title::text) >= 5", name: "title_length"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "content", limit: 400, null: false
+    t.bigint "instrument_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instrument_id"], name: "index_questions_on_instrument_id"
+    t.check_constraint "length(content::text) >= 5", name: "questions_length"
+  end
+
   add_foreign_key "evaluated_instruments", "evaluateds"
   add_foreign_key "evaluated_instruments", "instruments"
+  add_foreign_key "questions", "instruments"
 end
