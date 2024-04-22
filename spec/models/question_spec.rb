@@ -1,7 +1,5 @@
-require 'rails_helper'
-
 RSpec.describe Question, type: :model do
-  let(:question) { build(:question) }
+  let(:question) { create(:question) }
 
   describe "validations" do
     context "with invalid params" do
@@ -29,11 +27,19 @@ RSpec.describe Question, type: :model do
           expect(question.errors.full_messages).to include(I18n.t("errors.long_length", attribute: Question.human_attribute_name(:content), max_length: 400))
         end
       end
+
+      context "when instrument_id is null" do
+        it "throws an error" do
+          question.instrument_id = nil
+          question.valid?
+
+          expect(question.errors.full_messages).to include(I18n.t("errors.blank", attribute: Question.human_attribute_name(:instrument_id)))
+        end
+      end
     end
 
     context "with valid params" do
       it "allows a question to be created" do
-
         expect(question.valid?).to be(true)
       end
     end

@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :question do
-    content { "Is Rails a happy framework to code with?" }
     association :instrument
+    content { "Is Rails a happy framework to code with?" }
+    instrument_id { instrument.id }
   end
 end

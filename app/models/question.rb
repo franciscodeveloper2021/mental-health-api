@@ -4,4 +4,7 @@ class Question < ApplicationRecord
   validates :content,
             presence: true,
             length: { minimum: 5, maximum: 400 }
+
+  validates :instrument_id,
+            presence: true
 end
