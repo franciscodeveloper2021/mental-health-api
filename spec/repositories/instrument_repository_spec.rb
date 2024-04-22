@@ -78,4 +78,38 @@ RSpec.describe InstrumentRepository, type: :repository do
       end
     end
   end
+
+  context "when params are invalid to be updated" do
+    describe "#update" do
+      it "does not update record" do
+        invalid_params = { title: "" }
+
+        repository.update(instrument.id, invalid_params)
+
+        expect(instrument.reload.title).not_to eq("")
+      end
+    end
+  end
+  context "when params valid to be updated" do
+    describe "#update" do
+      it "updates record" do
+        valid_params = { title: "New title" }
+
+        repository.update(instrument.id, valid_params)
+
+        expect(instrument.reload.title).to eq(valid_params[:title])
+      end
+    end
+  end
+
+  context "when record is destroyed" do
+    describe "destroy" do
+      it "expects to no longer find it on database" do
+        destroyed_instrument = repository.destroy(instrument.id)
+
+        expect { repository.find_instrument(instrument.id)
+        }.to raise_error(ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Instrument", attribute: instrument[:id]))
+      end
+    end
+  end
 end

@@ -23,4 +23,22 @@ class InstrumentRepository
 
     instrument
   end
+
+  def update(instrument_id, params)
+    instrument = find_instrument(instrument_id)
+
+    ActiveRecord::Base.transaction do
+      instrument.update(params)
+    end
+
+    instrument
+  end
+
+  def destroy(instrument_id)
+    instrument = find_instrument(instrument_id)
+
+    ActiveRecord::Base.transaction do
+      instrument.destroy
+    end
+  end
 end
