@@ -10,3 +10,4 @@ en:
     no_longer_exists: "%{record} with %{attribute} no longer exists"
   warnings:
     nothing: "There is no register of %{entity}"
+    has_been_assigned: "%{entity} has been already assigned to %{related}"

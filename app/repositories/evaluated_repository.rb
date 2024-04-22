@@ -50,6 +50,10 @@ class EvaluatedRepository
     evaluated = find_evaluated(evaluated_id)
     instrument = @instrument_repo.find_instrument(instrument_id)
 
+    if evaluated.instruments.include?(instrument)
+      raise RuntimeError, I18n.t("warnings.has_been_assigned", entity: instrument.title, related: evaluated.name)
+    end
+
     ActiveRecord::Base.transaction do
       evaluated.instruments << instrument
     end

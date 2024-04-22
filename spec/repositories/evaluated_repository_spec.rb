@@ -137,12 +137,28 @@ RSpec.describe EvaluatedRepository, type: :repository do
       end
     end
   end
-  context "when evaluated and isntrument exist" do
-    it "creates a many to many relationship" do
-      repository.assign_instrument(evaluated.id, instrument.id)
+  context "when instrument is already assigned to evaluated" do
+    describe "assign_instrument" do
+      it "should raise a warning" do
+        evaluated.instruments << instrument
 
-      expect(evaluated.instruments).to be_present
-      expect(instrument.evaluateds).to be_present
+        expect {
+          repository.assign_instrument(evaluated.id, instrument.id)
+        }.to raise_error(RuntimeError, I18n.t("warnings.has_been_assigned", entity: instrument.title, related: evaluated.name))
+
+        expect(evaluated.instruments.count).to eq(1)
+        expect(instrument.evaluateds.count).to eq(1)
+      end
+    end
+  end
+  context "when evaluated and isntrument exist" do
+    describe "assign_instrument" do
+      it "creates a many to many relationship" do
+        repository.assign_instrument(evaluated.id, instrument.id)
+
+        expect(evaluated.instruments).to be_present
+        expect(instrument.evaluateds).to be_present
+      end
     end
   end
 end
