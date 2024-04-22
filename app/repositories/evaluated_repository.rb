@@ -1,5 +1,9 @@
 class EvaluatedRepository
 
+  def initialize(instrument_repo = InstrumentRepository.new )
+    @instrument_repo = instrument_repo
+  end
+
   def find_all_evaluateds
     evaluateds = Evaluated.all
     return I18n.t("warnings.nothing", entity: "evaluateds") if evaluateds.empty?
@@ -40,5 +44,20 @@ class EvaluatedRepository
     ActiveRecord::Base.transaction do
       evaluated.destroy
     end
+  end
+
+  def assign_instrument(evaluated_id, instrument_id)
+    evaluated = find_evaluated(evaluated_id)
+    instrument = @instrument_repo.find_instrument(instrument_id)
+
+    if evaluated.instruments.include?(instrument)
+      raise RuntimeError, I18n.t("warnings.has_been_assigned", entity: instrument.title, related: evaluated.name)
+    end
+
+    ActiveRecord::Base.transaction do
+      evaluated.instruments << instrument
+    end
+
+    evaluated
   end
 end

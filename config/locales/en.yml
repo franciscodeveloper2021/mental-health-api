@@ -7,6 +7,7 @@ en:
     short_length: "%{attribute} is too short (minimum is %{min_length} characters)"
     long_length: "%{attribute} is too long (maximum is %{max_length} characters)"
     not_found: "%{record} with %{attribute} not found"
-    no_longer_exists: "%{record} with %{attribute} no longer exists"
   warnings:
+    destroyed: "%{record} deleted"
     nothing: "There is no register of %{entity}"
+    has_been_assigned: "%{entity} has been already assigned to %{related}"
