@@ -19,12 +19,30 @@ class QuestionRepository
     question
   end
 
+  def update(question_id, params)
+    question = find_question(question_id)
+
+    ActiveRecord::Base.transaction do
+      question.update(params)
+    end
+
+    question
+  end
+
   def destroy(question_id)
-    question = Question.find_by_id(question_id)
-    raise ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Question", attribute: question_id) if question.nil?
+    question = find_question(question_id)
 
     ActiveRecord::Base.transaction do
       question.destroy!
     end
+  end
+
+  private
+
+  def find_question(question_id)
+    question = Question.find_by_id(question_id)
+    raise ActiveRecord::RecordNotFound, I18n.t("errors.not_found", record: "Question", attribute: question_id) if question.nil?
+
+    question
   end
 end

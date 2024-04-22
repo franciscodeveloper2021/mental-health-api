@@ -39,6 +39,29 @@ RSpec.describe QuestionRepository, type: :repository do
     end
   end
 
+  context "when params are invalid to be updated" do
+    describe "#update" do
+      it "does not update record" do
+        invalid_params = { content: "" }
+
+        repository.update(question.id, invalid_params)
+
+        expect(question.reload.content).not_to eq("")
+      end
+    end
+  end
+  context "when params are valid to be updated" do
+    describe "#update" do
+      it "updates record" do
+        valid_params = { content: "New content" }
+
+        repository.update(question.id, valid_params)
+
+        expect(question.reload.content).to eq(valid_params[:content])
+      end
+    end
+  end
+
   context "when record exists" do
     describe "#destroy" do
       it "destroys the record" do
