@@ -39,6 +39,12 @@ class EvaluatedsController < ApplicationController
   def assign_instrument
     result = @service.assign_instrument(params[:id], params[:instrument_id])
 
+    if result
+      evaluated_email = result.email
+      instrument_link = "http://mocklink"
+      NotifierMailer.instrument_assigned_email(evaluated_email, instrument_link).deliver_now
+    end
+
     render json: { evaluated: result, instruments: result.instruments }, status: :ok
   end
 
