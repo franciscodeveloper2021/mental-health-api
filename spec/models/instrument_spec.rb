@@ -58,4 +58,35 @@ RSpec.describe Instrument, type: :model do
       end
     end
   end
+
+  describe "#update_status" do
+    context "when all questions have associated answers" do
+      let(:instrument) { create(:instrument) }
+
+      before do
+        create_list(:question, 3, instrument: instrument)
+        instrument.questions.each do |question|
+          create(:answer, question: question)
+        end
+      end
+
+      it "updates the status to done" do
+        instrument.update_status
+        expect(instrument.status).to eq("done")
+      end
+    end
+
+    context "when not all questions have associated answers" do
+      let(:instrument) { create(:instrument) }
+
+      before do
+        create_list(:question, 3, instrument: instrument)
+      end
+
+      it "updates the status to pendent" do
+        instrument.update_status
+        expect(instrument.status).to eq("pendent")
+      end
+    end
+  end
 end

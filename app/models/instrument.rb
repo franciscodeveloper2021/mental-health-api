@@ -10,4 +10,18 @@ class Instrument < ApplicationRecord
   validates :description,
             presence: true,
             length: { minimum:10, maximum: 300 }
+
+  enum status: { pendent: 0, done: 1 }
+
+  after_save :update_status
+
+  def update_status
+    new_status = if questions.count == questions.joins(:answer).distinct.count
+      :done
+    else
+      :pendent
+    end
+
+    update_columns(status: new_status)
+  end
 end

@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_232246) do
   create_table "instruments", force: :cascade do |t|
     t.string "title", limit: 40, null: false
     t.text "description", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.check_constraint "length(description) >= 10", name: "description_length"
