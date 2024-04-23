@@ -13,7 +13,7 @@ class Instrument < ApplicationRecord
 
   enum status: { pendent: 0, done: 1 }
 
-  after_save :update_status
+  after_create :update_status
 
   def update_status
     new_status = if questions.count.zero? || questions.joins(:answer).distinct.count.zero?
