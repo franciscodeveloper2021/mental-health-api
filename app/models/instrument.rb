@@ -16,7 +16,9 @@ class Instrument < ApplicationRecord
   after_save :update_status
 
   def update_status
-    new_status = if questions.count == questions.joins(:answer).distinct.count
+    new_status = if questions.count.zero? || questions.joins(:answer).distinct.count.zero?
+      :pendent
+    elsif questions.count == questions.joins(:answer).distinct.count
       :done
     else
       :pendent
