@@ -58,4 +58,43 @@ RSpec.describe Instrument, type: :model do
       end
     end
   end
+
+  describe "#update_status" do
+    let(:instrument) { create(:instrument) }
+
+    context "when there are no questions associated" do
+      it "sets the status to 'pendent'" do
+        instrument.update_status
+
+        expect(instrument.status).to eq("pendent")
+      end
+    end
+
+    context "when all questions have answers" do
+      before do
+        3.times do
+          question = create(:question, instrument: instrument)
+          create(:answer, question: question)
+        end
+      end
+
+      it "sets the status to 'done'" do
+        instrument.update_status
+
+        expect(instrument.status).to eq("done")
+      end
+    end
+
+    context "when there are unanswered questions" do
+      before do
+        3.times { create(:question, instrument: instrument) }
+      end
+
+      it "sets the status to 'pendent'" do
+        instrument.update_status
+
+        expect(instrument.status).to eq("pendent")
+      end
+    end
+  end
 end
