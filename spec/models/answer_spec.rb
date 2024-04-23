@@ -27,4 +27,17 @@ RSpec.describe Answer, type: :model do
       end
     end
   end
+
+  describe "#update_instrument_status" do
+    let(:question) { create(:question) }
+    let(:instrument) { question.instrument }
+
+    it "updates the instrument status after creating an answer" do
+      expect(instrument.status).to eq("pendent")
+
+      create(:answer, question: question)
+
+      expect(instrument.reload.status).to eq("done")
+    end
+  end
 end
