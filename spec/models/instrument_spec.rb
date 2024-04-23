@@ -59,6 +59,7 @@ RSpec.describe Instrument, type: :model do
     end
   end
 
+
   describe "#update_status" do
     context "when all questions have associated answers" do
       let(:instrument) { create(:instrument) }
