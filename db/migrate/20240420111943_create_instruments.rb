@@ -3,6 +3,7 @@ class CreateInstruments < ActiveRecord::Migration[7.1]
     create_table :instruments do |t|
       t.string :title, null: false, limit: 40
       t.text :description, null: false, limit: 300
+      t.integer :status, default: 0, null: false
 
       t.timestamps
     end

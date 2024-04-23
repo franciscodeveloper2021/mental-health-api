@@ -45,7 +45,24 @@ class EvaluatedsController < ApplicationController
   def show_evaluted_and_related_instruments
     evaluated = @service.show(params[:id])
 
-    render json: { evaluated: evaluated, instruments: evaluated.instruments }, status: :ok
+    instruments_with_questions = evaluated.instruments.includes(questions: :answer)
+
+    data = {
+      evaluated: evaluated,
+      instruments_with_questions: instruments_with_questions.map do |instrument|
+        {
+          instrument: instrument,
+          questions: instrument.questions.map do |question|
+            {
+              question: question,
+              answer: question.answer
+            }
+          end
+        }
+      end
+    }
+
+    render json: data, status: :ok
   end
 
   private

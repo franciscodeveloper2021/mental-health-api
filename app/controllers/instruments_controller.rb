@@ -1,21 +1,41 @@
 class InstrumentsController < ApplicationController
-
   def initialize
     super
-
     @service = UseCases::Instruments::CrudInstrumentService.new
   end
 
   def index
-    instruments = @service.index
+    instruments = @service.index.includes(questions: :answer)
 
-    render json: instruments, status: :ok
+    instrument_data = instruments.map do |instrument|
+      {
+        instrument: instrument,
+        questions: instrument.questions.map do |question|
+          {
+            question: question,
+            answer: question.answer
+          }
+        end
+      }
+    end
+
+    render json: instrument_data, status: :ok
   end
 
   def show
     instrument = @service.show(params[:id])
 
-    render json: instrument, status: :ok
+    instrument_data = {
+      instrument: instrument,
+      questions: instrument.questions.map do |question|
+        {
+          question: question,
+          answer: question.answer
+        }
+      end
+    }
+
+    render json: instrument_data, status: :ok
   end
 
   def create

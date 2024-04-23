@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_20_221239) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_232246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.string "content", null: false
+    t.bigint "question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
 
   create_table "evaluated_instruments", force: :cascade do |t|
     t.bigint "evaluated_id", null: false
@@ -38,12 +46,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_221239) do
   create_table "instruments", force: :cascade do |t|
     t.string "title", limit: 40, null: false
     t.text "description", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.check_constraint "length(description) >= 10", name: "description_length"
     t.check_constraint "length(title::text) >= 5", name: "title_length"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "content", limit: 400, null: false
+    t.bigint "instrument_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instrument_id"], name: "index_questions_on_instrument_id"
+    t.check_constraint "length(content::text) >= 5", name: "questions_length"
+  end
+
+  add_foreign_key "answers", "questions"
   add_foreign_key "evaluated_instruments", "evaluateds"
   add_foreign_key "evaluated_instruments", "instruments"
+  add_foreign_key "questions", "instruments"
 end
