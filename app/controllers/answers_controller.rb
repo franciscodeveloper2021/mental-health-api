@@ -11,8 +11,8 @@ class AnswersController < ApplicationController
     question = answer.question
 
     render json: {
-      question: question
-      answer: answer,
+      question: question,
+      answer: answer
     }
   end
 
