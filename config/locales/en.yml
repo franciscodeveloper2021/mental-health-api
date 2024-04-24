@@ -11,3 +11,5 @@ en:
     destroyed: "%{record} deleted"
     nothing: "There is no register of %{entity}"
     has_been_assigned: "%{entity} has been already assigned to %{related}"
+  authentication:
+    invalid_auth: "Invalid authentication"

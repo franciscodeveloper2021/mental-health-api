@@ -11,3 +11,5 @@ pt:
     destroyed: "%{record} excluído"
     nothing: "Não há registro de %{entity}"
     has_been_assigned: "%{entity} já foi atribuído a %{related}"
+  authentication:
+    invalid_auth: "Autenticação inválida"
