@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :psychologists
   resources :evaluateds do
     member do
       post 'assign_instrument'
