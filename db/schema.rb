@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_22_232246) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_24_044303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_232246) do
     t.datetime "updated_at", null: false
     t.check_constraint "length(description) >= 10", name: "description_length"
     t.check_constraint "length(title::text) >= 5", name: "title_length"
+  end
+
+  create_table "psychologists", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.check_constraint "length(name::text) >= 2", name: "min_length_name"
   end
 
   create_table "questions", force: :cascade do |t|
