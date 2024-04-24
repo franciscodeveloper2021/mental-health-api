@@ -49,6 +49,7 @@ Essas entidades formam a base da aplicação para o sistema de instrumentos psic
 5. **Tratamento de Exceções e Internacionalização:**
    - O código inclui tratamento de exceções para lidar com situações de erro de forma robusta e garantir uma experiência de usuário consistente.
    - O uso da gem I18n para internacionalização permite a tradução de mensagens de erro e avisos, tornando a aplicação mais acessível para usuários de diferentes idiomas.
+   - Os idiomas disponíveis hoje são o português e o inglês
 
 
 
