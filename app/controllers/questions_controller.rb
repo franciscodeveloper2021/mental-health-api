@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_psychologist!
 
   def initialize
     super
@@ -28,5 +29,11 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:instrument_id, :content)
+  end
+
+  def authenticate_psychologist!
+    @current_psychologist = Authentication::Authenticator.authenticate_psychologist!(request)
+  rescue JWT::DecodeError
+    render json: { error: 'Unauthorized' }, status: :unauthorized
   end
 end

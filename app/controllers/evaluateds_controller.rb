@@ -1,4 +1,5 @@
 class EvaluatedsController < ApplicationController
+  before_action :authenticate_psychologist!
 
   def initialize
     super
@@ -75,5 +76,11 @@ class EvaluatedsController < ApplicationController
 
   def evaluated_params
     params.require(:evaluated).permit(:name, :cpf, :email, :birthdate)
+  end
+
+  def authenticate_psychologist!
+    @current_psychologist = Authentication::Authenticator.authenticate_psychologist!(request)
+  rescue JWT::DecodeError
+    render json: { error: 'Unauthorized' }, status: :unauthorized
   end
 end

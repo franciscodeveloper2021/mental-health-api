@@ -1,4 +1,6 @@
 class InstrumentsController < ApplicationController
+  before_action :authenticate_psychologist!
+
   def initialize
     super
     @service = UseCases::Instruments::CrudInstrumentService.new
@@ -60,5 +62,11 @@ class InstrumentsController < ApplicationController
 
   def instrument_params
     params.require(:instrument).permit(:title, :description)
+  end
+
+  def authenticate_psychologist!
+    @current_psychologist = Authentication::Authenticator.authenticate_psychologist!(request)
+  rescue JWT::DecodeError
+    render json: { error: 'Unauthorized' }, status: :unauthorized
   end
 end
