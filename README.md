@@ -2,25 +2,30 @@
 
 ### Importante: 
 - Esse Readme aborda: **Entidades da Aplicação**, **Padronização e Boas Práticas Aplicadas**, **Requisitos** e por fim  **Como testar**
+- Por favor leia com atenção cada ponto para um entendimento completo da aplicação, suas regras de negócio e arquitetura.
 
 ### Entidades da Aplicação:
 
-1. **Evaluated (Avaliado):**
+1. **Psychologist (Psicólogo):**
+   - Representa os psicólogos que após serem autenticados tem o permissionamento de operar toda a aplicação.
+   - Atributos: Nome, Senha.
+
+2. **Evaluated (Avaliado):**
    - Representa os indivíduos que serão avaliados por meio dos instrumentos psicológicos.
    - Atributos: Nome, CPF, Email e Data de Nascimento.
    - Relacionamentos: Pode ter vários instrumentos aplicados.
 
-2. **Instrument (Instrumento):**
+3. **Instrument (Instrumento):**
    - Representa os instrumentos psicológicos que serão aplicados nos avaliados.
    - Atributos: Título e Descrição.
    - Relacionamentos: Pode ser aplicado em vários avaliados e pode conter várias questões.
 
-3. **Question (Questão):**
+4. **Question (Questão):**
    - Representa as perguntas que compõem os instrumentos psicológicos.
    - Atributos: Conteúdo da questão.
    - Relacionamentos: Pertence a um instrumento e pode ter várias respostas.
 
-4. **Answer (Resposta):**
+5. **Answer (Resposta):**
    - Representa as respostas fornecidas pelos avaliados às questões dos instrumentos.
    - Atributos: Conteúdo da resposta.
    - Relacionamentos: Pertence a uma questão.
@@ -31,7 +36,7 @@ Essas entidades formam a base da aplicação para o sistema de instrumentos psic
 
 1. **Separação de Responsabilidades (Separation of Concerns):**
    - A aplicação segue o padrão MVC (Model-View-Controller), onde cada componente tem uma responsabilidade específica: o Model (Modelo) representa os dados e a lógica de negócios, o Controller (Controlador) lida com a interação do usuário e o fluxo de controle, e a View (Visão) apresenta os dados ao usuário.
-   - Além disso, a camada de lógica de negócios foi subdividida em Model, Repository e Service, garantindo uma separação clara entre a representação dos dados, a persistência e a manipulação dos mesmos.
+   - Além disso, a camada de lógica de negócios foi subdividida em **Model, Repository e Service**, garantindo uma separação clara entre a representação dos dados, a persistência e a manipulação dos mesmos.
 
 2. **Design Patterns (Padrões de Projeto):**
    - O padrão Repository foi utilizado para encapsular a lógica de persistência de dados em objetos separados, facilitando a manutenção e a testabilidade do código.
@@ -44,17 +49,27 @@ Essas entidades formam a base da aplicação para o sistema de instrumentos psic
 4. **Test-Driven Development (Desenvolvimento Orientado a Testes - TDD):**
    - Todos os componentes da aplicação possuem testes unitários escritos utilizando o framework RSpec, garantindo que as funcionalidades se comportem conforme o esperado e que futuras alterações não quebrem o funcionamento existente.
    - O TDD promove uma abordagem incremental para o desenvolvimento de software, onde os testes são escritos antes da implementação do código, o que ajuda a garantir a qualidade do software desde o início do processo de desenvolvimento.
-   - Como os todos os componentes da aplicação possuem testes unitários, a API conta com uma cobertura de 65 testes.
+   - Como os todos os componentes da aplicação possuem testes unitários, a API conta com uma cobertura de mais de 75 testes.
 
 5. **Tratamento de Exceções e Internacionalização:**
    - O código inclui tratamento de exceções para lidar com situações de erro de forma robusta e garantir uma experiência de usuário consistente.
    - O uso da gem I18n para internacionalização permite a tradução de mensagens de erro e avisos, tornando a aplicação mais acessível para usuários de diferentes idiomas.
    - Os idiomas disponíveis hoje são o português e o inglês.
 
+6. **Autenticação JWT (JSON Web Tokens):**
+   - A aplicação utiliza autenticação JWT para garantir a segurança das rotas e dos dados transmitidos entre o cliente e o servidor.
+   - O JWT é empregado para autenticar **psicólogos** e autorizar o acesso a recursos protegidos da aplicação.
+   - Essa abordagem oferece uma maneira segura e escalável de gerenciar a autenticação e a autorização na aplicação.
+
+
+
+
 
 
 
 ### Requisitos:
+
+1. **Autenticação como psicólogo:**
 
 2. **Cadastro de Avaliados:**
 
