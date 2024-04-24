@@ -151,7 +151,7 @@ RSpec.describe EvaluatedRepository, type: :repository do
       end
     end
   end
-  context "when evaluated and isntrument exist" do
+  context "when evaluated and instrument exist" do
     describe "assign_instrument" do
       it "creates a many to many relationship" do
         repository.assign_instrument(evaluated.id, instrument.id)
