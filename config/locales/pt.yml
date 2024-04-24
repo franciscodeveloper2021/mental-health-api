@@ -1,0 +1,13 @@
+pt:
+  errors:
+    blank: "%{attribute} não pode ficar em branco"
+    invalid: "%{attribute} é inválido"
+    taken: "%{attribute} já está em uso"
+    unformatted: "%{attribute} deve estar no formato %{formatting}"
+    short_length: "%{attribute} é muito curto (mínimo é %{min_length} caracteres)"
+    long_length: "%{attribute} é muito longo (máximo é %{max_length} caracteres)"
+    not_found: "%{record} com %{attribute} não encontrado"
+  warnings:
+    destroyed: "%{record} excluído"
+    nothing: "Não há registro de %{entity}"
+    has_been_assigned: "%{entity} já foi atribuído a %{related}"
