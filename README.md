@@ -372,125 +372,90 @@ Essas entidades formam a base da aplicação para o sistema de instrumentos psic
 
 1. Ver todos os avaliados: 
 
-  Método HTTP: GET
-
-  Rota: ```
-      http://localhost:3000/evaluateds
-   ```
+   - Método HTTP: GET
+   - Rota: `http://localhost:3000/evaluateds`
+   
 2. Ver avaliado específico:
 
-   Método HTTP: GET
-
-   Rota: ```
-      http://localhost:3000/evaluateds/:ID
-   ```
-
+   - Método HTTP: GET
+   - Rota: `http://localhost:3000/evaluateds/:ID`
+   
 3. Atualizar avaliado:
 
-   Método HTTP: PUT
-
-   Rota: ```
-      http://localhost:3000/evaluateds/:ID
-   ```
-
-  Corpo da requsição, exemplo
-
-   ```
-
-     "evaluated": {
-        "name": "William updated",
-       }
-   }
-   ```
-
-   - Ou use qualquer outro atributo que você queira atualizar
+   - Método HTTP: PUT
+   - Rota: `http://localhost:3000/evaluateds/:ID`
+   - Corpo da requisição, exemplo:
+     ```json
+     {
+        "evaluated": {
+           "name": "William updated"
+        }
+     }
+     ```
+     - Ou use qualquer outro atributo que você queira atualizar
 
 4. Deletar avaliado:
 
-   Método HTTP: DELETE
+   - Método HTTP: DELETE
+   - Rota: `http://localhost:3000/evaluateds/:ID`
 
-   Rota: ```
-      http://localhost:3000/evaluateds/:ID
-   ```
 
 **Instrumentos**
 
 1. Ver todos os instrumentos: 
 
-  Método HTTP: GET
+   - Método HTTP: GET
+   - Rota: `http://localhost:3000/instruments`
 
-  Rota: ```
-      http://localhost:3000/instruments
-   ```
 2. Ver instrumento específico:
 
-   Método HTTP: GET
-
-   Rota: ```
-      http://localhost:3000/instruments/:ID
-   ```
+   - Método HTTP: GET
+   - Rota: `http://localhost:3000/instruments/:ID`
 
 3. Atualizar instrumento:
 
-   Método HTTP: PUT
-
-   Rota: ```
-      http://localhost:3000/instruments/:ID
-   ```
-
-  Corpo da requsição, exemplo
-
-   ```
-
-     "instrument": {
-        "title": "Title updated",
-       }
-   }
-   ```
-
-   - Ou use qualquer outro atributo que você queira atualizar
+   - Método HTTP: PUT
+   - Rota: `http://localhost:3000/instruments/:ID`
+   - Corpo da requisição, exemplo:
+     ```json
+     {
+        "instrument": {
+           "title": "Title updated"
+        }
+     }
+     ```
+     - Ou use qualquer outro atributo que você queira atualizar
 
 4. Deletar instrumento:
 
-   Método HTTP: DELETE
-
-   Rota: ```
-      http://localhost:3000/instruments/:ID
-   ```
+   - Método HTTP: DELETE
+   - Rota: `http://localhost:3000/instruments/:ID`
 
 **Perguntas**
 
 3. Atualizar pergunta:
 
-   Método HTTP: PUT
-
-   Rota: ```
-      http://localhost:3000/questions/:ID
-   ```
-
-  Corpo da requsição, exemplo
-
-   ```
-
-     "question": {
-        "content": "This content has been updated",
-       }
-   }
-   ```
-
-   - Ou use qualquer outro atributo que você queira atualizar
+   - Método HTTP: PUT
+   - Rota: `http://localhost:3000/questions/:ID`
+   - Corpo da requisição, exemplo:
+     ```json
+     {
+        "question": {
+           "content": "This content has been updated"
+        }
+     }
+     ```
+     - Ou use qualquer outro atributo que você queira atualizar
 
 4. Deletar pergunta:
 
-   Método HTTP: DELETE
-
-   Rota: ```
-      http://localhost:3000/pergunta/:ID
-   ```
+   - Método HTTP: DELETE
+   - Rota: `http://localhost:3000/pergunta/:ID`
 
 ### Considerações finais
 
-- Tome o tempo necessário para ler essa documentação e testar a aplicação
-- Não se limite ao passo a passo de testes aqui, tente quebrar a aplicação e testar as validações e regras de negócio
+- Tome o tempo necessário para ler essa documentação e testar a aplicação.
+- Não se limite ao passo a passo de testes aqui, tente quebrar a aplicação e testar as validações e regras de negócio.
 - Use os testes e os models para entender plenamente cada domínio da aplicação e como eles interagem um com o outro e suas regras.
 - Caso haja qualquer dúvida ou erro no passo a passo de testes, ou sugestões para melhorias, não guarde para si, entre em contato comigo pelo email: franciscosantanaalvesleite@gmail.com ou abra um PR com as correções se desejar :D
+
