@@ -87,8 +87,8 @@ Essas entidades formam a base da aplicação para o sistema de instrumentos psic
 - As requisições a API deverão ser feitas através de um cliente como Postman ou Insôminia
 - Esse passo a passo é o "caminho feliz" do fluxo da aplicação. Fique a vontade para sobrecarregar a API com cenários de testes manuais como um verdadeiro usuário (o melhor QA que existe xD)
 - Sinta-se a vontade para ler os casos de testes unitaŕios e testá-los manualmente, já que ele aborda várias possibilidades e em como a API lidaria com elas, funcionando assim como uma verdadeira documenação dinâmica da aplicação.
-- Uma branch com **Docker** será disponibilzada caso você tenha o **Docker** instalado, a aplicação está rodando no **localhost:3000**. Porém se você tiver problemas para subir a aplcição ou acessá-la após dar um docker compose up no container, use branch **main** e rode **rails server** para subir a aplicação. O nome da branch com docker configurado é **docker** :D
-- Caso opte por rodar na branch **main** você deverá ter o **Ruby 3.1.2**, **Rails 7.1.3** e **Postgres lastest** version para subir a aplicação.
+- Uma branch com **Docker** será disponibilzada caso você tenha o **Docker** instalado, a aplicação está rodando no **localhost:3000**.O nome da branch com docker configurado é **docker** :D
+- Caso opte por rodar na branch **main** você deverá ter o **Ruby 3.1.2**, **Rails 7.1.3** e **Postgres lastest** version para subir a aplicação. Rode o comando **rails server**.
 
 ### COMO TESTAR
 
